@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pas de chauffage</title>
+	<link rel="icon" href="img/favicon.ico" sizes="144x144">
+	<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+	<link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		body {
+			position: relative;
+			font-family: Arial, sans-serif;
+			background-color: #ffffff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			margin: 0;
+			padding: 10px; /* Padding for smaller screens */
+			box-sizing: border-box;
+			font-size: 1em;
+		}
+		.sticky {
+			position: fixed;
+			background-color: #ffffff;
+			top: 0;
+			width: 100%;
+			min-height: 2em;
+			padding: 5px;
+			margin: 0 auto;
+			z-index: 1;
+		}
+		.container {
+			position: relative;
+			width: 70%;
+			padding-right: 5px;
+			padding-left: 5px;
+			margin: 0 auto;
+		}
+		.overlay-blue {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #194e93;
+		}
+		
+		form {
+			display: block;
+			position: relative;
+			background-color: transparent;
+			padding-bottom: 20px;
+			max-width: 400px;
+			width: 100%;
+			margin: 0 auto;
+		}
+		
+		.title {
+			color: #194e93 !important;
+			font-size: 2.5em;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.form-title {
+			text-align: center;
+			color: #FFFFFF !important;
+			font-size: 1.5em;
+		}
+		.warning {
+			text-align: center;
+			color: #ffffff !important;
+			font-size: 1em;
+			/* font-weight: bold; */
+			text-decoration: underline;
+		}
+
+		.fontuser {
+			position: relative;
+			display: inline-block;
+			width: 100%;
+		}
+		.fontuser:after {
+			position: absolute;
+			font-family: 'FontAwesome';
+			color: #194e93;
+		}
+		.fontuser.email:after {
+			content: '\f003';
+			left: .3em;
+			top: 1em;
+		}
+		.fontuser.temperature:after {
+			content: '\f2cb';
+			left: .6em;
+			top: 1em;
+		}
+		.fontuser.humidity:after {
+			content: '\f043';
+			left: .6em;
+			top: 1em;
+		}
+		.fontuser.client_nb:after {
+			content: '\f05a';
+			left: .5em;
+			top: 1em;
+		}
+		.fontuser.address:after {
+			content: '\f041';
+			left: .7em;
+			top: 1em;
+		}
+
+		input {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			-ms-appearance: none;
+			-o-appearance: none;
+			appearance: none;
+			box-shadow: none !important;
+			outline: none !important;
+		}
+		input[type="text"],
+		input[type="number"] {
+			/* display: inline-block;
+			position: relative; */
+			width: 100%;
+			padding: 8px 10px 8px 30px;
+			margin: 8px 0px;
+			border: none;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		input[type="submit"] {
+			width: 100%;
+			margin-top: 10px;
+			padding: 12px;
+			border: none;
+			border-radius: 4px;
+			background-color: #ff5100;
+			color: white;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #fff;
+			color: #194e93;
+		}
+
+		/* Media query for smaller screens */
+		@media (max-width: 480px) {
+			.container {
+				width: 100%;
+				padding-right: 5px;
+				padding-left: 5px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			form {
+				padding: 1px;
+			}
+			.title {
+				font-size: 1.7em;
+			}
+			input {
+				font-size: 1em;
+			}
+			input[type="text"],
+			input[type="number"] {
+				padding: 8px 10px 8px 30px;
+			}
+			.fontuser.email:after {
+				top: 1.1em;
+			}
+			.fontuser.temperature:after {
+				top: 1.1em;
+			}
+			.fontuser.humidity:after {
+				top: 1.1em;
+			}
+			.fontuser.client_nb:after {
+				top: 1.1em;
+			}
+			.fontuser.address:after {
+				top: 1.1em;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="overlay-blue"></div>
+	<div class="sticky">
+		<h1 class="title">Vous êtes locataire à Logirep Sevran Charcot.</h1>
+	</div>
+	<div class="container">
+		<form id="dataForm" method="GET">
+			<h2 class="form-title">Vous n'avez pas de chauffage, faites-le nous savoir.</h2>
+
+			<!-- <input type="hidden" name="api_key" value="Z9M1A739NU1624L0" /> -->
+
+			<input type="hidden" id="datetime" name="datetime" />
+			<div class="fontuser email">
+				<input type="text" id="email" name="email" placeholder="Email" required />
+			</div>
+			<div class="fontuser temperature">
+				<input type="number" step="0.1" id="temperature" name="temperature" placeholder="Température" required />
+			</div>
+			<div class="fontuser humidity">
+				<input type="number" step="0.1" id="humidity" name="humidity" placeholder="Humidité" required />
+			</div>
+			<div class="fontuser client_nb">
+				<input type="text" id="client_nb" name="client_nb" placeholder="N° de client" required />
+			</div>
+			<div class="fontuser address">
+				<input type="text" id="address" name="address" placeholder="Adresse" required />
+			</div>
+			<input type="submit" value="ENVOYER" />
+			<p class="warning">NB: Les informations saisies ne seront partagées qu'avec votre accord.</p>
+		</form>
+	</div>
+
+	<script>
+
+		var date;
+
+		document.querySelectorAll('input[type="number"]').forEach(input => {
+			input.addEventListener('blur', function() {
+			let value = parseFloat(this.value);
+			if (!isNaN(value)) {
+				this.value = value.toFixed(1); // Fixe à deux décimales
+			}
+			});
+		});
+
+		const scriptURL = 'https://script.google.com/macros/s/AKfycbzlNFxE5GgkdWGAmwGuaG3sOxK_IfVxMh8Op88cy2ZuUdorYu7eYWWYwMlY37C9oFQ/exec';
+		
+		const form = document.getElementById('dataForm');
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+
+			date = new Date();
+			document.getElementById('datetime').value = date.toLocaleString("fr");
+
+			fetch(scriptURL, {method: 'POST', body: new FormData(form)})
+			.then(response => {
+				console.log(response);
+				if (response.ok) {
+					alert("Données envoyées avec succès !");
+				} else {
+					alert("Erreur lors de l'envoi des données.");
+				}
+			})
+			.catch(error => {
+				console.error('Erreur:', error);
+				alert("Une erreur est survenue. Vérifiez votre connexion.");
+			});
+		});
+	</script>
+
+</body>
+</html>
